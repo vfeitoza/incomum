@@ -18,7 +18,7 @@
 /*
  * BSD License
  *
-Copyright (c) 2011, inComum Team.
+Copyright (c) 2012, inComum Team.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -53,7 +53,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 * To compile in debug mode (to show URL rewrites on /etc/inComum-*.log)
 * g++ -Ddebug -o inComum_debug inComum.cpp
 *
-* verion 0.3.6
+* If you add another plugin, please, send us a copy to email:
+* luciano.pinheiro@gmail.com
+*
+* verion 0.3.7
 *
 */
 
@@ -83,7 +86,7 @@ int main(int argc, char **argv)
 
 	if(argc > 1){
 		if(argv[1][0] == '-' && argv[1][1] == 'v' ) {
-			cout << "inComum 0.3.6 (2012-01-11) http://sourceforge.net/projects/incomum/" << endl;
+			cout << "inComum 0.3.7 (2012-01-24) http://sourceforge.net/projects/incomum/" << endl;
 			cout << "===========" << endl;
 			cout << "-youtube" << endl;
 			cout << "-googlevideo" << endl;
@@ -101,6 +104,7 @@ int main(int argc, char **argv)
 			cout << "-xvideos.com" << endl;
 			cout << "-globo.com" << endl;
 			cout << "-msn catalog" << endl;
+			cout << "-videobb.com" << endl;
 			#if debug
 			cout << "-=[ Running in debug mode. Check /tmp/inComum-*.log files ]=-" << endl;
 			#endif
@@ -137,7 +141,7 @@ int main(int argc, char **argv)
 				if(url.find("noflv=") != string::npos && url.find("ptk=") == string::npos){ //(noflv AND !ptk) => redirecting URL
 					urlf = url;
 				}else{
-					urlf = "http://flv.youtube.inComum/?id="+get_var(url, "id")+get_var(url, "video_id")+"&quality="+get_var(url, "fmt")+get_var(url, "itag")+"&redirect_counter="+get_var(url, "redirect_counter")+get_var(url, "st")+"&begin="+get_var(url,"begin");
+					urlf = "http://flv.youtube.inComum/?id="+get_var(url, "id")+get_var(url, "video_id")+"&quality="+get_var(url, "fmt")+get_var(url, "itag")+"&redirect_counter="+get_var(url, "redirect_counter")+get_var(url, "st")+"&begin="+get_var(url,"begin")+"&range="+get_var(url, "range");
 				}
 			}
 
@@ -225,7 +229,7 @@ int main(int argc, char **argv)
 		//redtube.com -last check: 2011-12-30
 		//example: http://videos.flv2.redtubefiles.com/_videos_t4vn23s9jc5498tgj49icfj4678/0000090/_h264flv/0090017.flv?47aac1f74dca44b0626f9b5acf21d75cd5dee7e8937c9cd51b27114cbb64d1abdacd57b1c8f7662835b5852858f0556998fb41dad6317b0e2c76&ec_seek=49672846
 		}else if(regexMatch("^http://(img..|videos\\.flv.{0,1})\\.redtubefiles\\.com/", domain)){
-			urlf = "http://redtube.inComum/"+ get_path(url, 'Y') +"?start="+ get_var(url, "ec_seek");
+			urlf = "http://redtube.inComum/" + get_path(url, 'Y') + "?start=" + get_var(url, "ec_seek");
 
 		//xvideos.com -last check: 2011-12-24
 		//example: http://porn126.xvideos.com/videos/flv/9/b/4/xvideos.com_9b4f0e80763bb256f1a4e27a32ffcbe6.flv?e=1324741579&ri=1024&rs=85&h=1503fe575697f4dab651d1244ffc18fb
@@ -238,7 +242,13 @@ int main(int argc, char **argv)
 		// TODO: has start var?
 		}else if(regexMatch("catalog.video.msn.com/.*share", url)){
 			urlf = "http://catalog.msn.inComum/"+get_path(url,'N');
+
+		//videobb.com -last check: 2012-01-24
+		//example: http://s269.videobb.com/s?v=QeHwaooHQQ5G&t=1327417389&u=&r=2&c=e6db2e6cc7ea3366b4f65ff07e74cc6262ecd39d8727a94e9003e93210f1e4236b0352125b8fbd3af49be21c84030668&start=0
+		}else if(regexMatch("^http://s[0-9]{0,3}\\.videobb\\.com/", domain)){
+			urlf = "http://videobb.inComum/?id="+get_var(url, "v")+"&quality="+get_var(url, "r")+"&start="+get_var(url, "start");
 		}
+
 		#if debug
 			if(urlf == url){
 				SaveLine << url + " > (same)\n";

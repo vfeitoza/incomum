@@ -1,4 +1,4 @@
-inComum v 0.3.6
+inComum v 0.3.7
 =======
 Squid (or Lusca) helper to be used with storeurl_rewrite_program feature.
 His goal is to create equivalency rules for distinct but equivalent URLs.
