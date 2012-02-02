@@ -1,4 +1,4 @@
-inComum v 0.7
+inComum 0.3.8
 =======
 Plugin para Squid (e Lusca) a ser usado com o recurso storeurl_rewrite_program.
 Seu objetivo é criar uma ligação entre URLs em domínios diferentes, mas equivalentes.
@@ -18,4 +18,5 @@ http://sourceforge.net/projects/incomum/
 
 inComum Team:
 Luciano Pinheiro (lucianopinheiro@users.sourceforge.net)
-Vitor Feitoza.
+Robson F. Ramaldes
+Vitor Feitoza

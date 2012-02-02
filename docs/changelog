@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.3.8 (2012-02-02)
+-----
+Config fixed for: avast, tumblr, ytimg, ggpht, photobucket, globo.com
+blip.tv fixed.
+AVG added.
+
 0.3.7 (2012-01-24)
 -----
 Youtube updated. Thanks to Robson F. Ramaldes.

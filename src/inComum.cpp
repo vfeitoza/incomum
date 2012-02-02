@@ -56,7 +56,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 * If you add another plugin, please, send us a copy to email:
 * luciano.pinheiro@gmail.com
 *
-* verion 0.3.7
+* verion 0.3.8
 *
 */
 
@@ -86,7 +86,7 @@ int main(int argc, char **argv)
 
 	if(argc > 1){
 		if(argv[1][0] == '-' && argv[1][1] == 'v' ) {
-			cout << "inComum 0.3.7 (2012-01-24) http://sourceforge.net/projects/incomum/" << endl;
+			cout << "inComum 0.3.8 (2012-02-02) http://sourceforge.net/projects/incomum/" << endl;
 			cout << "===========" << endl;
 			cout << "-youtube" << endl;
 			cout << "-googlevideo" << endl;
@@ -95,6 +95,7 @@ int main(int argc, char **argv)
 			cout << "-tumblr" << endl;
 			cout << "-photobucket" << endl;
 			cout << "-avast" << endl;
+			cout << "-avg" << endl;
 			cout << "-vimeo" << endl;
 			cout << "-blip.tv" << endl;
 			cout << "-globo.com" << endl;
@@ -181,6 +182,13 @@ int main(int argc, char **argv)
 				urlf = "http://download.avast.inComum/"+get_path(url,'N');
 			}
 
+		//AVG plugin - last check: 2012-02-02
+		//example: http://af.avg.com/softw/80free/update/u8iavi4164u4162uy.bin
+		}else if(regexMatch("\\.avg\\.c(om|z)/$", domain)){
+			if(regexMatch("^http://(backup|a.|pupdate-aa)\\.avg\\.c(om|z)/softw/", url)){
+				urlf = "http://avg.inComum/"+get_path(url,'N');
+			}
+
 		//vimeo plugin -last check: 2012-01-11
 		// TODO: has start var?
 		//example: http://av.vimeo.com/68769/772/77100523.mp4?token=1326296561_d50e78c38a4d49174b08e77c6b2bd0f4
@@ -196,11 +204,13 @@ int main(int argc, char **argv)
 				urlf = "http://metacafe.inComum/"+get_path(url,'Y');
 			}
 
-		//blip.tv plugin
-		// TODO: has start var?
-		}else if(regexMatch("blip\\.tv/$", domain)){
-			if(regexMatch("video", domain)){
-				urlf = "http://bliptv.inComum/"+get_path(url,'Y');
+		//blip.tv plugin - last check 2012-02-02
+		//example: http://a14.video2.blip.tv/10020009553710/GiselleAchecar-EcoRicoEp007232.m4v?brs=2493&bri=12.2
+		//example: http://j14.video2.blip.tv/10020009553710/GiselleAchecar-EcoRicoEp007232.m4v?brs=2493&bri=12.2&showplayer=20120110140747&start=201&referrer=http://blip.tv
+		//example: http://j2.video2.blip.tv/12950010298587/Sexynerdgirl-Vlog111Follywood875.m4v?brs=2782&bri=4.5&showplayer=20120110140747&start=3&referrer=http://blip.tv
+		}else if(regexMatch("\\.blip\\.tv/$", domain)){
+			if(regexMatch("video.*m4v", url)){
+				urlf = "http://bliptv.inComum/"+get_path(url,'Y')+"?start="+get_var(url,"start");
 			}
 
 		//globo plugin
@@ -330,7 +340,7 @@ string get_domain(const string url)
 }
 
 
-// regex
+/* regex */
 int regexMatch(string er, string line)
 {
     int error;
