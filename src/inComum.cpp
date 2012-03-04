@@ -54,9 +54,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 * g++ -Ddebug -o inComum_debug inComum.cpp
 *
 * If you add another plugin, please, send us a copy to email:
-* luciano.pinheiro@gmail.com
+* luciano.pinheiro@gmail.com 
+* or
+* rframaldes@users.sf.net
 *
-* verion 0.3.8
+* verion 0.3.9
 *
 */
 
@@ -65,6 +67,8 @@ using namespace std;
 string get_var(const string url,const string var); //get some var from url
 string get_path(const string url, const char removeQuery); //path only (optionally remove query string)
 string get_domain(const string url); //get domain only (remove path)
+string get_filename(const string url); //get filename only
+string get_foldername(const string url, const int position); //get folder name of a specified position.
 int regexMatch(string er, string line); //implement regex by regex.h
 
 int main(int argc, char **argv)
@@ -86,12 +90,13 @@ int main(int argc, char **argv)
 
 	if(argc > 1){
 		if(argv[1][0] == '-' && argv[1][1] == 'v' ) {
-			cout << "inComum 0.3.8 (2012-02-02) http://sourceforge.net/projects/incomum/" << endl;
+			cout << "inComum 0.3.9 (2012-03-04) http://sourceforge.net/projects/incomum/" << endl;
 			cout << "===========" << endl;
 			cout << "-youtube" << endl;
 			cout << "-googlevideo" << endl;
 			cout << "-orkut img/static" << endl;
 			cout << "-ggpht" << endl;
+			cout << "-gstatic" << endl;
 			cout << "-tumblr" << endl;
 			cout << "-photobucket" << endl;
 			cout << "-avast" << endl;
@@ -102,6 +107,8 @@ int main(int argc, char **argv)
 			cout << "-tvuol.uol.com.br" << endl;
 			cout << "-redtube.com" << endl;
 			cout << "-porntube.com" << endl;
+			cout << "-pornhub.com" << endl;
+			cout << "-phncdn.com" << endl;
 			cout << "-xvideos.com" << endl;
 			cout << "-globo.com" << endl;
 			cout << "-msn catalog" << endl;
@@ -161,13 +168,18 @@ int main(int argc, char **argv)
         //ggpht.com -last check: 2011-05-15
         }else if(regexMatch("\\.ggpht\\.com/$", domain)){
             if(regexMatch("^http://lh.\\.", domain)){
-                urlf = "http://ggpht.inComum/"+get_path(url,'N');
+	      urlf = "http://ggpht.inComum/"+get_path(url,'N');
             }
+            
+	//gstatic.com -last check: 2012-02-05
+	//example: http://t3.gstatic.com/images?q=tbn:ANd9GcQa4Z8ImpTJY5B0pPDKCrWBRFb2-d3muKU6w-t022cnkEpq7vn4Cg
+	}else if(regexMatch("^http://t[0-3]\\.gstatic\\.com/$", domain)){
+	      urlf = "http://gstatic.inComum/" + get_path(url, 'N');
 
         //tumblr.com -last check: 2011-05-15
         }else if(regexMatch("\\.media\\.tumblr\\.com/$", domain)){
             if(regexMatch("^http://.{1,2}\\.", domain)){
-                urlf = "http://tumblr.inComum/"+get_path(url,'N');
+	      urlf = "http://tumblr.inComum/"+get_path(url,'N');
             }
 
         //photobucket.com -last check: 2011-05-15
@@ -186,7 +198,7 @@ int main(int argc, char **argv)
 		//example: http://af.avg.com/softw/80free/update/u8iavi4164u4162uy.bin
 		}else if(regexMatch("\\.avg\\.c(om|z)/$", domain)){
 			if(regexMatch("^http://(backup|a.|pupdate-aa)\\.avg\\.c(om|z)/softw/", url)){
-				urlf = "http://avg.inComum/"+get_path(url,'N');
+				urlf = "http://avg.inComum/updates/" + get_filename(url);
 			}
 
 		//vimeo plugin -last check: 2012-01-11
@@ -246,6 +258,61 @@ int main(int argc, char **argv)
 		} else if (regexMatch("^http://porn.{1,3}\\.xvideos\\.com/", domain)) {
 			if (regexMatch("\\.flv\\?", url)) {
 				urlf = "http://xvideos.inComum/" + get_path(url, 'Y') + "?start=" + get_var(url, "fs");
+			}
+
+		//phncdn.com -last check: 2012-02-05
+		//example1: http://cdn3.image.pornhub.phncdn.com/thumbs/004/258/475/small.jpg?cache=3012728
+		//example2: http://cdn1.public.keezmovies.phncdn.com/201112/16/731238/240p_371k_731238.mp4?sr=1440&int=614400b&nvb=20120203194641&nva=20120203214641&hash=00f3f3ae0d7e28916817a&start=530
+		}else if(regexMatch("phncdn\\.com/$", domain)){
+			if (regexMatch("^http://cdn[1-3]\\.image\\.pornhub\\.phncdn.com/$", domain)){			  
+				urlf = "http://image.pornhub.phncdn.inComum/" + get_path(url, 'Y');	
+				
+			} else if (regexMatch("^http://cdn[1-3]\\.image\\.tube8\\.phncdn.com/$", domain)){
+				urlf = "http://image.tube8.phncdn.inComum/" + get_path(url, 'Y');
+				
+			} else if (regexMatch("^http://cdn[1-3]\\.image\\.keezmovies\\.phncdn.com/$", domain)){
+				urlf = "http://image.keezmovies.phncdn.inComum/" + get_path(url, 'Y');
+				
+			} else if (regexMatch("^http://cdn[1-3]\\.image\\.extremetube\\.phncdn.com/$", domain)){
+				urlf = "http://image.extremetube.phncdn.inComum/" + get_path(url, 'Y');
+				
+			} else if (regexMatch("^http://cdn[1-3]\\.image\\.spankwire\\.phncdn.com/$", domain)){
+				urlf = "http://image.spankwire.phncdn.inComum/" + get_path(url, 'Y');
+				
+			} else if (regexMatch("^http://cdn[1-3]\\.static\\.pornhub\\.phncdn.com/$", domain)){
+				urlf = "http://static.pornhub.phncdn.inComum/" + get_path(url, 'Y');
+				
+			} else if (regexMatch("^http://cdn[1-3]\\.static\\.tube8\\.phncdn.com/$", domain)){
+				urlf = "http://static.tube8.phncdn.inComum/" + get_path(url, 'Y');
+				
+			} else if (regexMatch("^http://cdn[1-3]\\.static\\.keezmovies\\.phncdn.com/$", domain)){
+				urlf = "http://static.keezmovies.phncdn.inComum/" + get_path(url, 'Y');
+				
+			} else if (regexMatch("^http://cdn[1-3]\\.static\\.extremetube\\.phncdn.com/$", domain)){
+				urlf = "http://static.extremetube.phncdn.inComum/" + get_path(url, 'Y');
+				
+			} else if (regexMatch("^http://cdn[1-3]\\.static\\.spankwire\\.phncdn.com/$", domain)){
+				urlf = "http://static.spankwire.phncdn.inComum/" + get_path(url, 'Y');
+				
+			} else if (regexMatch("^http://cdn[1-2][a|b]\\.video\\.pornhub\\.phncdn.com/$", domain)){
+				urlf = "http://video.pornhub.phncdn.inComum/" + get_path(url, 'Y') + "?fs=" + get_var(url, "fs");
+				
+			} else if (regexMatch("^http://cdn[1-3]\\.public\\.spankwire\\.phncdn.com/$", domain)){
+				urlf = "http://public.spankwire.phncdn.inComum/" + get_path(url, 'Y') + "?start=" + get_var(url, "start");;
+				
+			} else if (regexMatch("^http://cdn[1-3]\\.public\\.keezmovies\\.phncdn.com/$", domain)){
+				urlf = "http://public.keezmovies.phncdn.inComum/" + get_path(url, 'Y') + "?start=" + get_var(url, "start");;
+				
+			} else if (regexMatch("^http://cdn[1-3]\\.public\\.extremetube\\.phncdn.com/$", domain)){
+				urlf = "http://public.extremetube.phncdn.inComum/" + get_path(url, 'Y') + "?start=" + get_var(url, "start");;
+			}
+
+		//pornhub.com -last check: 2012-02-05
+		//rewrited to video.pornhub.phncdn.inComum
+		//example: http://nyc-v59.pornhub.com/dl/80b8c31b2287d7916d5a39e91ebe19b0/4f2f1248/videos/003/082/720/3082720.flv?r=165&b=3000
+		}else if(regexMatch("^http://nyc-v[0-9]{1,2}\\.pornhub\\.com/$", domain)){
+			if (regexMatch("\\.flv\\?", url)){			  
+				urlf = "http://video.pornhub.phncdn.inComum/" + get_foldername(url, 4) + "/" + get_foldername(url, 5) + "/" + get_foldername(url, 6) + "/" + get_foldername(url, 7) + "/" + get_filename(url) + "?fs=" + get_var(url, "fs");
 			}
 
 		//msn catalog videos plugin
@@ -337,6 +404,45 @@ string get_domain(const string url)
 		return url;
 	}
 
+}
+
+/* return filename */
+string get_filename(const string url) {
+	string::size_type x;
+	string path;
+	
+	path = get_path(url,'Y');
+	x = path.find_last_of("/");
+	if (x != string::npos) {
+		return path.substr(x + 1);
+	} else {
+		return "";
+	}
+}
+
+/* return folder name of a specified position*/
+string get_foldername(const string url, const int position) {
+        string::size_type i;
+        string::size_type nextPosition;
+        string::size_type start, end;
+        int contador = 1;
+    
+        string path =  "/" + get_path(url, 'Y');
+        for(i = path.find("/", 0); i != string::npos; i = path.find("/", i)) {             
+                if (contador == position) {
+                        nextPosition = path.find("/", i+1);
+                        start = i+1;
+                        end = nextPosition - start;
+                        if (nextPosition != string::npos){
+                                return path.substr(start,end);
+                        } else {
+                                return path.substr(i+1);
+                        }
+                }
+                contador++;
+                i++; 
+        }    
+        return "";
 }
 
 
