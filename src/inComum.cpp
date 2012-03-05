@@ -95,6 +95,7 @@ int main(int argc, char **argv)
 			cout << "-youtube" << endl;
 			cout << "-googlevideo" << endl;
 			cout << "-orkut img/static" << endl;
+			cout << "-fbcdn" << endl;
 			cout << "-ggpht" << endl;
 			cout << "-gstatic" << endl;
 			cout << "-tumblr" << endl;
@@ -159,34 +160,47 @@ int main(int argc, char **argv)
 				urlf = "http://orkut.inComum/"+get_path(url,'N');
 			}
 
+			
+		//fbcdn.net -last check: 2012-03-03 - Wenderson Souza (wendersonsouza at gmail.com) and Antonio Marcos
+		//example1: http://profile.ak.fbcdn.net/hprofile-ak-snc4/275217_100002839600343_396666461_q.jpg
+		//example2: http://a8.sphotos.ak.fbcdn.net/hphotos-ak-ash4/s320x320/427684_296197907109346_183581201704351_80
+		//example3: http://a5.sphotos.ak.fbcdn.net/hphotos-ak-ash2/s320x320/64623_374387329246111_333203666697811_1398687_226247264_n.jpg
+		}else if(regexMatch("(profile|sphotos)\\.ak\\.fbcdn\\.net/$", domain)){
+			if(regexMatch("hprofile-ak-.{1,}", get_foldername(url,1))){
+				urlf = "http://profile.fbcdn.inComum/hprofile-ak/" + get_filename(url);
+				
+			} else if(regexMatch("hphotos-ak-.{1,}", get_foldername(url, 1))) {
+				urlf = "http://sphotos.fbcdn.inComum/hphotos-ak/" + get_foldername(url,2) + "/" + get_filename(url);
+			}
+			
 		//ytimg.com -last check: 2011-05-15
-        }else if(regexMatch("\\.ytimg\\.com/$", domain)){
-            if(regexMatch("^http://i(|.)\\.", domain)){
-                urlf = "http://ytimg.inComum/"+get_path(url,'N');
-            }
+		}else if(regexMatch("\\.ytimg\\.com/$", domain)){
+		  if(regexMatch("^http://i(|.)\\.", domain)){
+			urlf = "http://ytimg.inComum/"+get_path(url,'N');
+		}
 
-        //ggpht.com -last check: 2011-05-15
-        }else if(regexMatch("\\.ggpht\\.com/$", domain)){
-            if(regexMatch("^http://lh.\\.", domain)){
-	      urlf = "http://ggpht.inComum/"+get_path(url,'N');
-            }
+		//ggpht.com -last check: 2011-05-15
+		}else if(regexMatch("\\.ggpht\\.com/$", domain)){
+			if(regexMatch("^http://lh.\\.", domain)){
+			    urlf = "http://ggpht.inComum/"+get_path(url,'N');
+			}
             
-	//gstatic.com -last check: 2012-02-05
-	//example: http://t3.gstatic.com/images?q=tbn:ANd9GcQa4Z8ImpTJY5B0pPDKCrWBRFb2-d3muKU6w-t022cnkEpq7vn4Cg
-	}else if(regexMatch("^http://t[0-3]\\.gstatic\\.com/$", domain)){
-	      urlf = "http://gstatic.inComum/" + get_path(url, 'N');
+		//gstatic.com -last check: 2012-02-05
+		//example: http://t3.gstatic.com/images?q=tbn:ANd9GcQa4Z8ImpTJY5B0pPDKCrWBRFb2-d3muKU6w-t022cnkEpq7vn4Cg
+		}else if(regexMatch("^http://t[0-3]\\.gstatic\\.com/$", domain)){
+		      urlf = "http://gstatic.inComum/" + get_path(url, 'N');
 
-        //tumblr.com -last check: 2011-05-15
-        }else if(regexMatch("\\.media\\.tumblr\\.com/$", domain)){
-            if(regexMatch("^http://.{1,2}\\.", domain)){
-	      urlf = "http://tumblr.inComum/"+get_path(url,'N');
-            }
+		//tumblr.com -last check: 2011-05-15
+		}else if(regexMatch("\\.media\\.tumblr\\.com/$", domain)){
+		    if(regexMatch("^http://.{1,2}\\.", domain)){
+		      urlf = "http://tumblr.inComum/"+get_path(url,'N');
+		    }
 
-        //photobucket.com -last check: 2011-05-15
-        }else if(regexMatch("\\.photobucket\\.com/$", domain)){
-            if(regexMatch("^http://(i|th).{1,4}\\.", domain)){
-                urlf = "http://photobucket.inComum/"+get_path(url,'N');
-            }
+		//photobucket.com -last check: 2011-05-15
+		}else if(regexMatch("\\.photobucket\\.com/$", domain)){
+		    if(regexMatch("^http://(i|th).{1,4}\\.", domain)){
+			urlf = "http://photobucket.inComum/"+get_path(url,'N');
+		    }
 
 		//avast plugin
 		}else if(regexMatch("\\.avast\\.com/$", domain)){
@@ -420,7 +434,7 @@ string get_filename(const string url) {
 	}
 }
 
-/* return folder name of a specified position*/
+/* return folder name of a specified position */
 string get_foldername(const string url, const int position) {
         string::size_type i;
         string::size_type nextPosition;
