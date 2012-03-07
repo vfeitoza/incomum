@@ -161,16 +161,21 @@ int main(int argc, char **argv)
 			}
 
 			
-		//fbcdn.net -last check: 2012-03-03 - Wenderson Souza (wendersonsouza at gmail.com) and Antonio Marcos
+		//fbcdn.net -last check: 2012-03-06 - Wenderson Souza (wendersonsouza at gmail.com) and Antonio Marcos
 		//example1: http://profile.ak.fbcdn.net/hprofile-ak-snc4/275217_100002839600343_396666461_q.jpg
-		//example2: http://a8.sphotos.ak.fbcdn.net/hphotos-ak-ash4/s320x320/427684_296197907109346_183581201704351_80
-		//example3: http://a5.sphotos.ak.fbcdn.net/hphotos-ak-ash2/s320x320/64623_374387329246111_333203666697811_1398687_226247264_n.jpg
-		}else if(regexMatch("(profile|sphotos)\\.ak\\.fbcdn\\.net/$", domain)){
-			if(regexMatch("hprofile-ak-.{1,}", get_foldername(url,1))){
+		//example2: http://a5.sphotos.ak.fbcdn.net/hphotos-ak-ash2/s320x320/64623_374387329246111_333203666697811_1398687_226247264_n.jpg
+		//example3: http://a1.sphotos.ak.fbcdn.net/hphotos-ak-snc7/424783_404954249531812_315543425139562_1667258_488161428_n.jpg
+		//example4: http://photos-e.ak.fbcdn.net/hphotos-ak-snc7/424783_404954249531812_315543425139562_1667258_488161428_n.jpg
+		}else if(regexMatch("(profile|sphotos|photos-[a-z])\\.ak\\.fbcdn\\.net/$", domain)){
+			if(regexMatch("hprofile-ak-.{1,}", get_foldername(url, 1))){
 				urlf = "http://profile.fbcdn.inComum/hprofile-ak/" + get_filename(url);
 				
-			} else if(regexMatch("hphotos-ak-.{1,}", get_foldername(url, 1))) {
-				urlf = "http://sphotos.fbcdn.inComum/hphotos-ak/" + get_foldername(url,2) + "/" + get_filename(url);
+			} else if(regexMatch("hphotos-ak-.{1,}", get_foldername(url, 1))) { //redirect sphotos and photos-[a-z] to the same url
+				if (get_foldername(url,2) == "") { //Check if path contains a second folder or not.
+				  urlf = "http://sphotos.fbcdn.inComum/hphotos-ak/" + get_filename(url);
+				} else {
+				  urlf = "http://sphotos.fbcdn.inComum/hphotos-ak/" + get_foldername(url, 2) + "/" + get_filename(url);
+				}				
 			}
 			
 		//ytimg.com -last check: 2011-05-15
@@ -278,8 +283,8 @@ int main(int argc, char **argv)
 		//example1: http://cdn3.image.pornhub.phncdn.com/thumbs/004/258/475/small.jpg?cache=3012728
 		//example2: http://cdn1.public.keezmovies.phncdn.com/201112/16/731238/240p_371k_731238.mp4?sr=1440&int=614400b&nvb=20120203194641&nva=20120203214641&hash=00f3f3ae0d7e28916817a&start=530
 		}else if(regexMatch("phncdn\\.com/$", domain)){
-			if (regexMatch("^http://cdn[1-3]\\.image\\.pornhub\\.phncdn.com/$", domain)){			  
-				urlf = "http://image.pornhub.phncdn.inComum/" + get_path(url, 'Y');	
+			if (regexMatch("^http://cdn[1-3]\\.image\\.pornhub\\.phncdn.com/$", domain)){
+				urlf = "http://image.pornhub.phncdn.inComum/" + get_path(url, 'Y');
 				
 			} else if (regexMatch("^http://cdn[1-3]\\.image\\.tube8\\.phncdn.com/$", domain)){
 				urlf = "http://image.tube8.phncdn.inComum/" + get_path(url, 'Y');
@@ -312,13 +317,13 @@ int main(int argc, char **argv)
 				urlf = "http://video.pornhub.phncdn.inComum/" + get_path(url, 'Y') + "?fs=" + get_var(url, "fs");
 				
 			} else if (regexMatch("^http://cdn[1-3]\\.public\\.spankwire\\.phncdn.com/$", domain)){
-				urlf = "http://public.spankwire.phncdn.inComum/" + get_path(url, 'Y') + "?start=" + get_var(url, "start");;
+				urlf = "http://public.spankwire.phncdn.inComum/" + get_path(url, 'Y') + "?start=" + get_var(url, "start");
 				
 			} else if (regexMatch("^http://cdn[1-3]\\.public\\.keezmovies\\.phncdn.com/$", domain)){
-				urlf = "http://public.keezmovies.phncdn.inComum/" + get_path(url, 'Y') + "?start=" + get_var(url, "start");;
+				urlf = "http://public.keezmovies.phncdn.inComum/" + get_path(url, 'Y') + "?start=" + get_var(url, "start");
 				
 			} else if (regexMatch("^http://cdn[1-3]\\.public\\.extremetube\\.phncdn.com/$", domain)){
-				urlf = "http://public.extremetube.phncdn.inComum/" + get_path(url, 'Y') + "?start=" + get_var(url, "start");;
+				urlf = "http://public.extremetube.phncdn.inComum/" + get_path(url, 'Y') + "?start=" + get_var(url, "start");
 			}
 
 		//pornhub.com -last check: 2012-02-05
@@ -430,7 +435,7 @@ string get_filename(const string url) {
 	if (x != string::npos) {
 		return path.substr(x + 1);
 	} else {
-		return "";
+		return path;
 	}
 }
 
@@ -450,7 +455,7 @@ string get_foldername(const string url, const int position) {
                         if (nextPosition != string::npos){
                                 return path.substr(start,end);
                         } else {
-                                return path.substr(i+1);
+                                return "";
                         }
                 }
                 contador++;
