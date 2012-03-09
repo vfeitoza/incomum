@@ -90,7 +90,7 @@ int main(int argc, char **argv)
 
 	if(argc > 1){
 		if(argv[1][0] == '-' && argv[1][1] == 'v' ) {
-			cout << "inComum 0.3.9 (2012-03-04) http://sourceforge.net/projects/incomum/" << endl;
+			cout << "inComum 0.3.9 (2012-03-08) http://sourceforge.net/projects/incomum/" << endl;
 			cout << "===========" << endl;
 			cout << "-youtube" << endl;
 			cout << "-googlevideo" << endl;
@@ -114,6 +114,7 @@ int main(int argc, char **argv)
 			cout << "-globo.com" << endl;
 			cout << "-msn catalog" << endl;
 			cout << "-videobb.com" << endl;
+			cout << "-sourceforge.net" << endl;
 			#if debug
 			cout << "-=[ Running in debug mode. Check /tmp/inComum-*.log files ]=-" << endl;
 			#endif
@@ -343,6 +344,13 @@ int main(int argc, char **argv)
 		//example: http://s269.videobb.com/s?v=QeHwaooHQQ5G&t=1327417389&u=&r=2&c=e6db2e6cc7ea3366b4f65ff07e74cc6262ecd39d8727a94e9003e93210f1e4236b0352125b8fbd3af49be21c84030668&start=0
 		}else if(regexMatch("^http://s[0-9]{0,3}\\.videobb\\.com/", domain)){
 			urlf = "http://videobb.inComum/?id="+get_var(url, "v")+"&quality="+get_var(url, "r")+"&start="+get_var(url, "start");
+		
+		//dl.sourceforge.net -last check: 2012-03-08
+		//example: http://tenet.dl.sourceforge.net/project/aresgalaxy/aresgalaxy/AresRegular218_020212/AresRegular218_020212.zip
+		}else if(regexMatch("^http://[a-z]{1,}\\.dl\\.sourceforge\\.net/$", domain)){
+			if (regexMatch("^project\\/", get_path(url, 'Y'))){
+				urlf = "http://dl.sourceforge.inComum/" + get_path(url, 'Y');
+			}
 		}
 
 		#if debug
