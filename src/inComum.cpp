@@ -90,7 +90,7 @@ int main(int argc, char **argv)
 
 	if(argc > 1){
 		if(argv[1][0] == '-' && argv[1][1] == 'v' ) {
-			cout << "inComum 0.3.9 (2012-03-08) http://sourceforge.net/projects/incomum/" << endl;
+			cout << "inComum 0.3.9 (2012-03-18) http://sourceforge.net/projects/incomum/" << endl;
 			cout << "===========" << endl;
 			cout << "-youtube" << endl;
 			cout << "-googlevideo" << endl;
@@ -99,6 +99,7 @@ int main(int argc, char **argv)
 			cout << "-ggpht" << endl;
 			cout << "-gstatic" << endl;
 			cout << "-tumblr" << endl;
+			cout << "-blogspot" << endl;
 			cout << "-photobucket" << endl;
 			cout << "-avast" << endl;
 			cout << "-avg" << endl;
@@ -207,6 +208,10 @@ int main(int argc, char **argv)
 		    if(regexMatch("^http://(i|th).{1,4}\\.", domain)){
 			urlf = "http://photobucket.inComum/"+get_path(url,'N');
 		    }
+
+		//bp.blogspot.com -last check: 2012-03-18
+		}else if(regexMatch("^http://[1-4]\\.bp.blogspot\\.com/$", domain)){
+			urlf = "http://bp.blogspot.inComum/"+get_path(url,'N');
 
 		//avast plugin
 		}else if(regexMatch("\\.avast\\.com/$", domain)){
