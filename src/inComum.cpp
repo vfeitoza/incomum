@@ -88,7 +88,7 @@ int main(int argc, char **argv)
 
 	if(argc > 1){
 		if(argv[1][0] == '-' && argv[1][1] == 'v' ) {
-			cout << "inComum 0.3.9 (2012-03-09) http://sourceforge.net/projects/incomum/" << endl;
+			cout << "inComum 0.3.9 (2012-03-18) http://sourceforge.net/projects/incomum/" << endl;
 			cout << "===========" << endl;
 			cout << "-youtube" << endl;
 			cout << "-googlevideo" << endl;
@@ -97,6 +97,7 @@ int main(int argc, char **argv)
 			cout << "-ggpht" << endl;
 			cout << "-google gstatic" << endl;
 			cout << "-tumblr" << endl;
+			cout << "-blogspot" << endl;
 			cout << "-photobucket" << endl;
 			cout << "-avast" << endl;
 			cout << "-avg" << endl;
@@ -112,6 +113,7 @@ int main(int argc, char **argv)
 			cout << "-globo.com" << endl;
 			cout << "-msn catalog" << endl;
 			cout << "-videobb.com" << endl;
+			cout << "-sourceforge.net" << endl;
 			#if debug
 			cout << "-=[ Running in debug mode. Check /tmp/inComum-*.log files ]=-" << endl;
 			#endif
@@ -158,17 +160,20 @@ int main(int argc, char **argv)
 				urlf = "http://orkut.inComum/"+get_path(url,'N');
 			}
 
-
-		//fbcdn.net -last check: 2012-03-03 - Wenderson Souza (wendersonsouza at gmail.com) and Antonio Marcos
+		//fbcdn.net -last check: 2012-03-06 - Wenderson Souza (wendersonsouza at gmail.com) and Antonio Marcos
 		//example1: http://profile.ak.fbcdn.net/hprofile-ak-snc4/275217_100002839600343_396666461_q.jpg
-		//example2: http://a8.sphotos.ak.fbcdn.net/hphotos-ak-ash4/s320x320/427684_296197907109346_183581201704351_80
-		//example3: http://a5.sphotos.ak.fbcdn.net/hphotos-ak-ash2/s320x320/64623_374387329246111_333203666697811_1398687_226247264_n.jpg
-		}else if(regexMatch("(profile|sphotos)\\.ak\\.fbcdn\\.net/$", domain)){
-			if(regexMatch("hprofile-ak-.{1,}", get_foldername(url,1))){
+		//example2: http://a5.sphotos.ak.fbcdn.net/hphotos-ak-ash2/s320x320/64623_374387329246111_333203666697811_1398687_226247264_n.jpg
+		//example3: http://a1.sphotos.ak.fbcdn.net/hphotos-ak-snc7/424783_404954249531812_315543425139562_1667258_488161428_n.jpg
+		//example4: http://photos-e.ak.fbcdn.net/hphotos-ak-snc7/424783_404954249531812_315543425139562_1667258_488161428_n.jpg
+		}else if(regexMatch("(profile|sphotos|photos-[a-z])\\.ak\\.fbcdn\\.net/$", domain)){
+			if(regexMatch("hprofile-ak-.{1,}", get_foldername(url, 1))){
 				urlf = "http://profile.fbcdn.inComum/hprofile-ak/" + get_filename(url);
-
-			} else if(regexMatch("hphotos-ak-.{1,}", get_foldername(url, 1))) {
-				urlf = "http://sphotos.fbcdn.inComum/hphotos-ak/" + get_foldername(url,2) + "/" + get_filename(url);
+			} else if(regexMatch("hphotos-ak-.{1,}", get_foldername(url, 1))) { //redirect sphotos and photos-[a-z] to the same url
+				if (get_foldername(url,2) == "") { //Check if path contains a second folder or not.
+				  urlf = "http://sphotos.fbcdn.inComum/hphotos-ak/" + get_filename(url);
+				} else {
+				  urlf = "http://sphotos.fbcdn.inComum/hphotos-ak/" + get_foldername(url, 2) + "/" + get_filename(url);
+				}
 			}
 
 		//ytimg.com -last check: 2011-05-15
@@ -200,6 +205,10 @@ int main(int argc, char **argv)
 		    if(regexMatch("^http://(i|th).{1,4}\\.", domain)){
 			urlf = "http://photobucket.inComum/"+get_path(url,'N');
 		    }
+
+		//bp.blogspot.com -last check: 2012-03-18
+		}else if(regexMatch("^http://[1-4]\\.bp.blogspot\\.com/$", domain)){
+			urlf = "http://bp.blogspot.inComum/"+get_path(url,'N');
 
 		//avast plugin
 		}else if(regexMatch("\\.avast\\.com/$", domain)){
@@ -315,6 +324,13 @@ int main(int argc, char **argv)
 		//example: http://s269.videobb.com/s?v=QeHwaooHQQ5G&t=1327417389&u=&r=2&c=e6db2e6cc7ea3366b4f65ff07e74cc6262ecd39d8727a94e9003e93210f1e4236b0352125b8fbd3af49be21c84030668&start=0
 		}else if(regexMatch("^http://s[0-9]{0,3}\\.videobb\\.com/", domain)){
 			urlf = "http://videobb.inComum/?id="+get_var(url, "v")+"&quality="+get_var(url, "r")+"&start="+get_var(url, "start");
+
+		//dl.sourceforge.net -last check: 2012-03-08
+		//example: http://tenet.dl.sourceforge.net/project/aresgalaxy/aresgalaxy/AresRegular218_020212/AresRegular218_020212.zip
+		}else if(regexMatch("^http://[a-z]{1,}\\.dl\\.sourceforge\\.net/$", domain)){
+			if (regexMatch("^project\\/", get_path(url, 'Y'))){
+				urlf = "http://dl.sourceforge.inComum/" + get_path(url, 'Y');
+			}
 		}
 
 		#if debug
@@ -407,7 +423,7 @@ string get_filename(const string url) {
 	if (x != string::npos) {
 		return path.substr(x + 1);
 	} else {
-		return "";
+		return path;
 	}
 }
 
@@ -429,7 +445,7 @@ string get_foldername(const string url, const int position) {
                         if (nextPosition != string::npos){
                                 return path.substr(start,end);
                         } else {
-                                return path.substr(i+1);
+                                return "";
                         }
                 }
                 contador++;
