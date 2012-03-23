@@ -10,7 +10,7 @@ Because of that, this program works better when Squid is compiled with
 --enable-http-violations directive.
 
 You may check typing "% squid -v" on your shell prompt. In the case your
-installed pack has not hits directive (and you are using debian), you
+installed pack has not this directive (and you are using debian), you
 may follow the tutorial wich comes with this documentation.
 
 Project Page

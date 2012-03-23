@@ -88,10 +88,10 @@ int main(int argc, char **argv)
 
 	if(argc > 1){
 		if(argv[1][0] == '-' && argv[1][1] == 'v' ) {
-			cout << "inComum 0.3.9 (2012-03-18) http://sourceforge.net/projects/incomum/" << endl;
+			cout << "inComum 0.3.9 (2012-03-23) http://sourceforge.net/projects/incomum/" << endl;
 			cout << "===========" << endl;
 			cout << "-youtube" << endl;
-			cout << "-googlevideo" << endl;
+			cout << "-google video" << endl;
 			cout << "-orkut img/static" << endl;
 			cout << "-facebook fbcdn" << endl;
 			cout << "-ggpht" << endl;
@@ -160,7 +160,7 @@ int main(int argc, char **argv)
 				urlf = "http://orkut.inComum/"+get_path(url,'N');
 			}
 
-		//fbcdn.net -last check: 2012-03-06 - Wenderson Souza (wendersonsouza at gmail.com) and Antonio Marcos
+		//fbcdn.net -last check: 2012-03-06
 		//example1: http://profile.ak.fbcdn.net/hprofile-ak-snc4/275217_100002839600343_396666461_q.jpg
 		//example2: http://a5.sphotos.ak.fbcdn.net/hphotos-ak-ash2/s320x320/64623_374387329246111_333203666697811_1398687_226247264_n.jpg
 		//example3: http://a1.sphotos.ak.fbcdn.net/hphotos-ak-snc7/424783_404954249531812_315543425139562_1667258_488161428_n.jpg
@@ -206,8 +206,8 @@ int main(int argc, char **argv)
 			urlf = "http://photobucket.inComum/"+get_path(url,'N');
 		    }
 
-		//bp.blogspot.com -last check: 2012-03-18
-		}else if(regexMatch("^http://[1-4]\\.bp.blogspot\\.com/$", domain)){
+		//bp.blogspot.com -last check: 2012-03-23
+		}else if(regexMatch("^http://.\\.bp.blogspot\\.com/$", domain)){
 			urlf = "http://bp.blogspot.inComum/"+get_path(url,'N');
 
 		//avast plugin
@@ -327,8 +327,8 @@ int main(int argc, char **argv)
 
 		//dl.sourceforge.net -last check: 2012-03-08
 		//example: http://tenet.dl.sourceforge.net/project/aresgalaxy/aresgalaxy/AresRegular218_020212/AresRegular218_020212.zip
-		}else if(regexMatch("^http://[a-z]{1,}\\.dl\\.sourceforge\\.net/$", domain)){
-			if (regexMatch("^project\\/", get_path(url, 'Y'))){
+		}else if(regexMatch("^http://.*\\.dl\\.sourceforge\\.net/$", domain)){
+			if (regexMatch("^project/", get_path(url, 'Y'))){
 				urlf = "http://dl.sourceforge.inComum/" + get_path(url, 'Y');
 			}
 		}
