@@ -211,7 +211,7 @@ int main(int argc, char **argv)
 		//example: http://af.avg.com/softw/80free/update/u8iavi4164u4162uy.bin
 		}else if(regexMatch("\\.avg\\.c(om|z)/$", domain)){
 			if(regexMatch("^http://(backup|a.|pupdate-aa)\\.avg\\.c(om|z)/softw/", url)){
-				urlf = "http://avg.inComum/updates/" + get_filename(url);
+				urlf = "http://avg.inComum/" + get_filename(url);
 			}
 
 		//vimeo plugin -last check: 2012-01-11
@@ -276,61 +276,39 @@ int main(int argc, char **argv)
 		//phncdn.com -last check: 2012-02-05
 		//example1: http://cdn3.image.pornhub.phncdn.com/thumbs/004/258/475/small.jpg?cache=3012728
 		//example2: http://cdn1.public.keezmovies.phncdn.com/201112/16/731238/240p_371k_731238.mp4?sr=1440&int=614400b&nvb=20120203194641&nva=20120203214641&hash=00f3f3ae0d7e28916817a&start=530
-		}else if(regexMatch("phncdn\\.com/$", domain)){
-			if (regexMatch("^http://cdn[1-3]\\.image\\.pornhub\\.phncdn.com/$", domain)){
+		}else if(regexMatch("\\.phncdn\\.com/$", domain)){
+
+			if (regexMatch("^http://cdn.\\.(image|static)\\.pornhub\\.phncdn.com/$", domain)){
 				urlf = "http://image.pornhub.phncdn.inComum/" + get_path(url, 'Y');
 
-			} else if (regexMatch("^http://cdn[1-3]\\.image\\.tube8\\.phncdn.com/$", domain)){
-				urlf = "http://image.tube8.phncdn.inComum/" + get_path(url, 'Y');
-
-			} else if (regexMatch("^http://cdn[1-3]\\.image\\.keezmovies\\.phncdn.com/$", domain)){
-				urlf = "http://image.keezmovies.phncdn.inComum/" + get_path(url, 'Y');
-
-			} else if (regexMatch("^http://cdn[1-3]\\.image\\.extremetube\\.phncdn.com/$", domain)){
-				urlf = "http://image.extremetube.phncdn.inComum/" + get_path(url, 'Y');
-
-			} else if (regexMatch("^http://cdn[1-3]\\.image\\.spankwire\\.phncdn.com/$", domain)){
-				urlf = "http://image.spankwire.phncdn.inComum/" + get_path(url, 'Y');
-
-			} else if (regexMatch("^http://cdn[1-3]\\.static\\.pornhub\\.phncdn.com/$", domain)){
-				urlf = "http://static.pornhub.phncdn.inComum/" + get_path(url, 'Y');
-
-			} else if (regexMatch("^http://cdn[1-3]\\.static\\.tube8\\.phncdn.com/$", domain)){
-				urlf = "http://static.tube8.phncdn.inComum/" + get_path(url, 'Y');
-
-			} else if (regexMatch("^http://cdn[1-3]\\.static\\.keezmovies\\.phncdn.com/$", domain)){
-				urlf = "http://static.keezmovies.phncdn.inComum/" + get_path(url, 'Y');
-
-			} else if (regexMatch("^http://cdn[1-3]\\.static\\.extremetube\\.phncdn.com/$", domain)){
-				urlf = "http://static.extremetube.phncdn.inComum/" + get_path(url, 'Y');
-
-			} else if (regexMatch("^http://cdn[1-3]\\.static\\.spankwire\\.phncdn.com/$", domain)){
-				urlf = "http://static.spankwire.phncdn.inComum/" + get_path(url, 'Y');
-
-			} else if (regexMatch("^http://cdn[1-2][a|b]\\.video\\.pornhub\\.phncdn.com/$", domain)){
+			} else if (regexMatch("^http://cdn.[ab]\\.video\\.pornhub\\.phncdn.com/$", domain)){
 				urlf = "http://video.pornhub.phncdn.inComum/" + get_path(url, 'Y') + "?fs=" + get_var(url, "fs");
 
-			} else if (regexMatch("^http://cdn[1-3]\\.public\\.spankwire\\.phncdn.com/$", domain)){
-				urlf = "http://public.spankwire.phncdn.inComum/" + get_path(url, 'Y') + "?start=" + get_var(url, "start");;
+			} else if (regexMatch("^http://cdn.\\.(image|static)\\.tube8\\.phncdn.com/$", domain)){
+				urlf = "http://tube8.phncdn.inComum/" + get_path(url, 'Y');
 
-			} else if (regexMatch("^http://cdn[1-3]\\.public\\.keezmovies\\.phncdn.com/$", domain)){
-				urlf = "http://public.keezmovies.phncdn.inComum/" + get_path(url, 'Y') + "?start=" + get_var(url, "start");;
+			} else if (regexMatch("^http://cdn.\\.(image|static|public)\\.keezmovies\\.phncdn.com/$", domain)){
+				urlf = "http://keezmovies.phncdn.inComum/" + get_path(url, 'Y') + "?start=" + get_var(url, "start");;
 
-			} else if (regexMatch("^http://cdn[1-3]\\.public\\.extremetube\\.phncdn.com/$", domain)){
+			} else if (regexMatch("^http://cdn.\\.(image|static|public)\\.extremetube\\.phncdn.com/$", domain)){
 				urlf = "http://public.extremetube.phncdn.inComum/" + get_path(url, 'Y') + "?start=" + get_var(url, "start");;
+
+			} else if (regexMatch("^http://cdn.\\.(image|static|public)\\.spankwire\\.phncdn.com/$", domain)){
+				urlf = "http://public.spankwire.phncdn.inComum/" + get_path(url, 'Y') + "?start=" + get_var(url, "start");;
 			}
 
 		//pornhub.com -last check: 2012-02-05
 		//rewrited to video.pornhub.phncdn.inComum
 		//example: http://nyc-v59.pornhub.com/dl/80b8c31b2287d7916d5a39e91ebe19b0/4f2f1248/videos/003/082/720/3082720.flv?r=165&b=3000
-		}else if(regexMatch("^http://nyc-v[0-9]{1,2}\\.pornhub\\.com/$", domain)){
+		}else if(regexMatch("^http://nyc-v.{1,2}\\.pornhub\\.com/$", domain)){
 			if (regexMatch("\\.flv\\?", url)){
 				urlf = "http://video.pornhub.phncdn.inComum/" + get_foldername(url, 4) + "/" + get_foldername(url, 5) + "/" + get_foldername(url, 6) + "/" + get_foldername(url, 7) + "/" + get_filename(url) + "?fs=" + get_var(url, "fs");
 			}
 
-		//msn catalog videos plugin
-		// TODO: has start var?
-		}else if(regexMatch("catalog.video.msn.com/.*share", url)){
+		//msn catalog videos plugin - last check: 2012-03-20
+		//example: http://content4.catalog.video.msn.com/e2/ds/f9d00167-fc4a-4832-9e75-9ac7ac725d55.mp4
+		//
+		}else if(regexMatch("^http://(img|content).{1,2}.catalog.video.msn.com/", url)){
 			urlf = "http://catalog.msn.inComum/"+get_path(url,'N');
 
 		//videobb.com -last check: 2012-01-24
@@ -433,7 +411,9 @@ string get_filename(const string url) {
 	}
 }
 
-/* return folder name of a specified position */
+/* return folder name of a specified position
+ * position starts on 1 (0 is blank)
+ * */
 string get_foldername(const string url, const int position) {
         string::size_type i;
         string::size_type nextPosition;
