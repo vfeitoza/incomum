@@ -83,17 +83,16 @@ int main(int argc, char **argv)
 		string arraystring = stream.str();
 
 		ofstream SaveLine(arraystring.c_str(), ios::out);
-		//ofstream SaveLine("/tmp/inComum-" + pid + ".log", ios::out);
 	#endif
 
 	if(argc > 1){
 		if(argv[1][0] == '-' && argv[1][1] == 'v' ) {
 			cout << "inComum 0.3.9 (2012-03-24) http://sourceforge.net/projects/incomum/" << endl;
 			cout << "===========" << endl;
+			cout << "-facebook fbcdn" << endl;
 			cout << "-youtube" << endl;
 			cout << "-google video" << endl;
 			cout << "-orkut img/static" << endl;
-			cout << "-facebook fbcdn" << endl;
 			cout << "-ggpht" << endl;
 			cout << "-google gstatic" << endl;
 			cout << "-tumblr" << endl;
@@ -111,7 +110,7 @@ int main(int argc, char **argv)
 			cout << "-phncdn.com" << endl;
 			cout << "-xvideos.com" << endl;
 			cout << "-globo.com" << endl;
-			cout << "-msn catalog" << endl;
+			cout << "-msn video" << endl;
 			cout << "-videobb.com" << endl;
 			cout << "-sourceforge.net" << endl;
 			#if debug
@@ -144,8 +143,20 @@ int main(int argc, char **argv)
 
 		// inComum plugins below
 
+		//fbcdn.net -last check: 2012-03-06
+		//example1: http://profile.ak.fbcdn.net/hprofile-ak-snc4/275217_100002839600343_396666461_q.jpg
+		//example2: http://a5.sphotos.ak.fbcdn.net/hphotos-ak-ash2/s320x320/64623_374387329246111_333203666697811_1398687_226247264_n.jpg
+		//example3: http://a1.sphotos.ak.fbcdn.net/hphotos-ak-snc7/424783_404954249531812_315543425139562_1667258_488161428_n.jpg
+		//example4: http://photos-e.ak.fbcdn.net/hphotos-ak-snc7/424783_404954249531812_315543425139562_1667258_488161428_n.jpg
+		if(regexMatch("(profile|sphotos|photos-.)\\.ak\\.fbcdn\\.net/$", domain)){
+			if(regexMatch("hprofile-ak-.{1,}", get_foldername(url, 1))){
+				urlf = "http://fbcdn.inComum/profile/" + get_filename(url);
+			} else if(regexMatch("hphotos-ak-.{1,}", get_foldername(url, 1))) { //redirect sphotos and photos-[a-z] to the same url
+				urlf = "http://fbcdn.inComum/photos/" + get_foldername(url, 2) + "/" + get_filename(url);
+			}
+
 		//youtube/googlevideo plugin
-		if(regexMatch("(youtube|googlevideo)\\.com/$", domain)){
+		}else if(regexMatch("(youtube|googlevideo)\\.com/$", domain)){
 			if(regexMatch("/(get_video|videoplayback|videoplay)\\?.*id=", url)){
 				if(url.find("noflv=") != string::npos && url.find("ptk=") == string::npos){ //(noflv AND !ptk) => redirecting URL
 					urlf = url;
@@ -158,22 +169,6 @@ int main(int argc, char **argv)
 		}else if(regexMatch("\\.orkut\\.com/$", domain)){
 			if(regexMatch("^http://(img|static)[0-9]\\.", domain)){
 				urlf = "http://orkut.inComum/"+get_path(url,'N');
-			}
-
-		//fbcdn.net -last check: 2012-03-06
-		//example1: http://profile.ak.fbcdn.net/hprofile-ak-snc4/275217_100002839600343_396666461_q.jpg
-		//example2: http://a5.sphotos.ak.fbcdn.net/hphotos-ak-ash2/s320x320/64623_374387329246111_333203666697811_1398687_226247264_n.jpg
-		//example3: http://a1.sphotos.ak.fbcdn.net/hphotos-ak-snc7/424783_404954249531812_315543425139562_1667258_488161428_n.jpg
-		//example4: http://photos-e.ak.fbcdn.net/hphotos-ak-snc7/424783_404954249531812_315543425139562_1667258_488161428_n.jpg
-		}else if(regexMatch("(profile|sphotos|photos-[a-z])\\.ak\\.fbcdn\\.net/$", domain)){
-			if(regexMatch("hprofile-ak-.{1,}", get_foldername(url, 1))){
-				urlf = "http://profile.fbcdn.inComum/hprofile-ak/" + get_filename(url);
-			} else if(regexMatch("hphotos-ak-.{1,}", get_foldername(url, 1))) { //redirect sphotos and photos-[a-z] to the same url
-				if (get_foldername(url,2) == "") { //Check if path contains a second folder or not.
-				  urlf = "http://sphotos.fbcdn.inComum/hphotos-ak/" + get_filename(url);
-				} else {
-				  urlf = "http://sphotos.fbcdn.inComum/hphotos-ak/" + get_foldername(url, 2) + "/" + get_filename(url);
-				}
 			}
 
 		//ytimg.com -last check: 2011-05-15
@@ -195,7 +190,7 @@ int main(int argc, char **argv)
 		      urlf = "http://gstatic.inComum/" + get_path(url, 'N');
 
 		//tumblr.com -last check: 2012-03-24
-		}else if(regexMatch("^http://([0-9]{1,2}\\.|)media\\.tumblr\\.com/$", domain)){
+		}else if(regexMatch("^http://(.{1,2}\\.|)media\\.tumblr\\.com/$", domain)){
 		      urlf = "http://tumblr.inComum/"+get_path(url,'N');
 
 		//photobucket.com -last check: 2011-05-15
@@ -222,7 +217,6 @@ int main(int argc, char **argv)
 			}
 
 		//vimeo plugin -last check: 2012-01-11
-		// TODO: has start var?
 		//example: http://av.vimeo.com/68769/772/77100523.mp4?token=1326296561_d50e78c38a4d49174b08e77c6b2bd0f4
 		}else if(regexMatch("\\.vimeo\\.com/$", domain)){
 			if(regexMatch("^http://av\\.vimeo\\.com/.*\\?token=", url)){
@@ -230,7 +224,6 @@ int main(int argc, char **argv)
 			}
 
 		//metacafe plugin
-		// TODO: has start var?
 		}else if(regexMatch("mccont\\.com/$", domain)){
 			if(regexMatch("^http://v\\.mccont\\.com/ItemFiles/%5BFrom%20www\\.metacafe\\.com%5D%.{20}flv\\?", url)){
 				urlf = "http://metacafe.inComum/"+get_path(url,'Y');
