@@ -88,7 +88,7 @@ int main(int argc, char **argv)
 
 	if(argc > 1){
 		if(argv[1][0] == '-' && argv[1][1] == 'v' ) {
-			cout << "inComum 0.3.9 (2012-03-23) http://sourceforge.net/projects/incomum/" << endl;
+			cout << "inComum 0.3.9 (2012-03-24) http://sourceforge.net/projects/incomum/" << endl;
 			cout << "===========" << endl;
 			cout << "-youtube" << endl;
 			cout << "-google video" << endl;
@@ -194,11 +194,9 @@ int main(int argc, char **argv)
 		}else if(regexMatch("^http://t.\\.gstatic\\.com/$", domain)){
 		      urlf = "http://gstatic.inComum/" + get_path(url, 'N');
 
-		//tumblr.com -last check: 2011-05-15
-		}else if(regexMatch("\\.media\\.tumblr\\.com/$", domain)){
-		    if(regexMatch("^http://.{1,2}\\.", domain)){
+		//tumblr.com -last check: 2012-03-24
+		}else if(regexMatch("^http://([0-9]{1,2}\\.|)media\\.tumblr\\.com/$", domain)){
 		      urlf = "http://tumblr.inComum/"+get_path(url,'N');
-		    }
 
 		//photobucket.com -last check: 2011-05-15
 		}else if(regexMatch("\\.photobucket\\.com/$", domain)){
