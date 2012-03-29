@@ -87,7 +87,7 @@ int main(int argc, char **argv)
 
 	if(argc > 1){
 		if(argv[1][0] == '-' && argv[1][1] == 'v' ) {
-			cout << "inComum 0.3.9 (2012-03-24) http://sourceforge.net/projects/incomum/" << endl;
+			cout << "inComum 0.3.9.1 (2012-03-29) http://sourceforge.net/projects/incomum/" << endl;
 			cout << "===========" << endl;
 			cout << "-facebook fbcdn" << endl;
 			cout << "-youtube" << endl;
