@@ -56,7 +56,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 * If you add another plugin, please, send us a copy to email:
 * luciano.pinheiro@gmail.com
 *
-* verion 0.3.9
+* verion 0.3.9.1
 *
 */
 
@@ -149,9 +149,9 @@ int main(int argc, char **argv)
 		//example3: http://a1.sphotos.ak.fbcdn.net/hphotos-ak-snc7/424783_404954249531812_315543425139562_1667258_488161428_n.jpg
 		//example4: http://photos-e.ak.fbcdn.net/hphotos-ak-snc7/424783_404954249531812_315543425139562_1667258_488161428_n.jpg
 		if(regexMatch("(profile|sphotos|photos-.)\\.ak\\.fbcdn\\.net/$", domain)){
-			if(regexMatch("hprofile-ak-.{1,}", get_foldername(url, 1))){
+			if(regexMatch("h?profile-ak-.{4}/", url)){
 				urlf = "http://fbcdn.inComum/profile/" + get_filename(url);
-			} else if(regexMatch("hphotos-ak-.{1,}", get_foldername(url, 1))) { //redirect sphotos and photos-[a-z] to the same url
+			} else if(regexMatch("h?photos-ak-.{4}/", url)) { //redirect sphotos and photos-[a-z] to the same url
 				urlf = "http://fbcdn.inComum/photos/" + get_foldername(url, 2) + "/" + get_filename(url);
 			}
 
@@ -216,16 +216,17 @@ int main(int argc, char **argv)
 				urlf = "http://avg.inComum/" + get_filename(url);
 			}
 
-		//vimeo plugin -last check: 2012-01-11
-		//example: http://av.vimeo.com/68769/772/77100523.mp4?token=1326296561_d50e78c38a4d49174b08e77c6b2bd0f4
+		//vimeo plugin - last check: 2012-03-29
+		//example: http://av.vimeo.com/79146/961/44048636.mp4?aksessionid=092cfa1ba7d4500771e530a1ed1201ed&token=1333042766_2b2fd33e8b8324cc4a8e3c3afe1b8b1b
 		}else if(regexMatch("\\.vimeo\\.com/$", domain)){
-			if(regexMatch("^http://av\\.vimeo\\.com/.*\\?token=", url)){
+			if(regexMatch("^http://av\\.vimeo\\.com/.*(&|\\?)aksessionid=", url)){
 				urlf = "http://vimeo.inComum/"+get_path(url,'Y');
 			}
 
-		//metacafe plugin
+		//metacafe plugin - last check: 2012-03-29
+		//example: http://v.mccont.com/ItemFiles/%5BFrom%20www.metacafe.com%5D%208289728.22118066.4.mp4?__gda__=1333049973_2f86c14a2a86295b58ca8d1fe0bc1a20
 		}else if(regexMatch("mccont\\.com/$", domain)){
-			if(regexMatch("^http://v\\.mccont\\.com/ItemFiles/%5BFrom%20www\\.metacafe\\.com%5D%.{20}flv\\?", url)){
+			if(regexMatch("^http://v\\.mccont\\.com/ItemFiles/%5BFrom%20www\\.metacafe\\.com%5D%.{21}mp4\\?", url)){
 				urlf = "http://metacafe.inComum/"+get_path(url,'Y');
 			}
 
