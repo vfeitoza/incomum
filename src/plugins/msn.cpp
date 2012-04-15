@@ -1,0 +1,14 @@
+#include "../helper.h"
+
+using namespace std;
+
+//msn catalog videos plugin - last check: 2012-03-20
+//example: http://content4.catalog.video.msn.com/e2/ds/f9d00167-fc4a-4832-9e75-9ac7ac725d55.mp4
+int msn(string domain, string url, string *urlf)
+{
+	  if(regexMatch("^http://(img|content).{1,2}.catalog.video.msn.com/", url)){
+		*urlf = "http://catalog.msn.inComum/" + get_path(url,'N');
+		return 1;
+	  }
+	  return 0;
+}
