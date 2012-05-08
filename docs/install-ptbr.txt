@@ -8,6 +8,8 @@ Para melhores resultados, o Squid deve estar compilado com a diretiva --enable-h
 
 Algumas versões podem apresentar problemas. Leia o leiame.txt antes de instalar.
 
+O Plugin de videos NetFlix necessita do patch de ignore-no-store presente no Lusca Cache.
+
 INSTALAÇÃO
 ----------
 

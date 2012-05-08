@@ -12,7 +12,9 @@ PLUGINS = $(D_PLUGINS)avast.o \
 	$(D_PLUGINS)ggpht.o \
 	$(D_PLUGINS)globo.o \
 	$(D_PLUGINS)gstatic.o \
+	$(D_PLUGINS)java.o \
 	$(D_PLUGINS)metacafe.o \
+	$(D_PLUGINS)modovideo.o \
 	$(D_PLUGINS)msn.o \
 	$(D_PLUGINS)netflix.o \
 	$(D_PLUGINS)orkut.o \
@@ -22,9 +24,11 @@ PLUGINS = $(D_PLUGINS)avast.o \
 	$(D_PLUGINS)porntube.o \
 	$(D_PLUGINS)redtube.o \
 	$(D_PLUGINS)sourceforge.o \
+	$(D_PLUGINS)terratv.o \
 	$(D_PLUGINS)tumblr.o \
 	$(D_PLUGINS)tvuol.o \
 	$(D_PLUGINS)videobb.o \
+	$(D_PLUGINS)videologtv.o \
 	$(D_PLUGINS)vimeo.o \
 	$(D_PLUGINS)xvideos.o \
 	$(D_PLUGINS)youtube.o \

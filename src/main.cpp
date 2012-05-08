@@ -41,7 +41,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 * To compile in debug mode (to show URL rewrites on /tmp/inComum-*.log)
 * make all DEBUG=y
 *
-* verion 0.4
+* If you add another plugin, please, send us a copy to email:
+* luciano.pinheiro@gmail.com
+* 
+* 
+* Version 0.4
 *
 */
 
@@ -66,7 +70,7 @@ int main(int argc, char **argv)
 		
 	if(argc > 1){
 		if(argv[1][0] == '-' && argv[1][1] == 'v' ) {
-			cout << "inComum 0.4-preview (2012-04-15)  http://sourceforge.net/projects/incomum/" << endl;
+			cout << "inComum 0.4-preview (2012-05-07)  http://sourceforge.net/projects/incomum/" << endl;
 			cout << "===========" << endl;
 			cout << "-facebook fbcdn" << endl;
 			cout << "-youtube" << endl;
@@ -92,6 +96,10 @@ int main(int argc, char **argv)
 			cout << "-globo.com" << endl;
 			cout << "-msn video" << endl;
 			cout << "-videobb.com" << endl;
+			cout << "-modovideo.com" << endl;
+			cout << "-videolog.tv" << endl;
+			cout << "-terratv" << endl;
+			cout << "-java" << endl;
 			cout << "-sourceforge.net" << endl;
 			#if debug
 				cout << "-=[ Running in debug mode. Check /tmp/inComum-*.log files ]=-" << endl;
@@ -136,6 +144,7 @@ int main(int argc, char **argv)
 		if(!metacafe(domain,url,&urlf))
 		if(!blip(domain,url,&urlf))
 		if(!globo(domain,url,&urlf))
+		if(!tvuol(domain,url,&urlf))
 		if(!netflix(domain,url,&urlf))
 		if(!porntube(domain,url,&urlf))
 		if(!redtube(domain,url,&urlf))
@@ -144,6 +153,10 @@ int main(int argc, char **argv)
 		if(!pornhub(domain,url,&urlf))
 		if(!msn(domain,url,&urlf))
 		if(!videobb(domain,url,&urlf))
+		if(!modovideo(domain,url,&urlf))
+		if(!videologtv(domain,url,&urlf))
+		if(!terratv(domain,url,&urlf))
+		if(!java(domain,url,&urlf))
 			sourceforge(domain,url,&urlf);
 
 		#if debug

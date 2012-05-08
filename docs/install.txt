@@ -8,6 +8,8 @@ For better results, Squid must be compiled with --enable-http-violations directi
 
 Some versions may present problems. Read important.txt before install.
 
+NetFlix videos plugin needs ignore-no-store patch present in Lusca Cache
+
 INSTALL
 ----------
 1. Compile the helper
