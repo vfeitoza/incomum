@@ -70,7 +70,7 @@ int main(int argc, char **argv)
 		
 	if(argc > 1){
 		if(argv[1][0] == '-' && argv[1][1] == 'v' ) {
-			cout << "inComum 0.4-preview (2012-05-07)  http://sourceforge.net/projects/incomum/" << endl;
+			cout << "inComum 0.4-preview (2012-06-04)  http://sourceforge.net/projects/incomum/" << endl;
 			cout << "===========" << endl;
 			cout << "-facebook fbcdn" << endl;
 			cout << "-youtube" << endl;
@@ -125,7 +125,7 @@ int main(int argc, char **argv)
 		//squid may send a blank line to exit
 		if(url.empty() || url.substr(0,7) != "http://"){
 			cout << url << endl;
-			return 0;
+			continue;
 		}
 
 		urlf=url;
@@ -156,7 +156,7 @@ int main(int argc, char **argv)
 		if(!modovideo(domain,url,&urlf))
 		if(!videologtv(domain,url,&urlf))
 		if(!terratv(domain,url,&urlf))
-		if(!java(domain,url,&urlf))
+		if(!sun(domain,url,&urlf))
 			sourceforge(domain,url,&urlf);
 
 		#if debug

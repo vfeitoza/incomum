@@ -9,7 +9,7 @@ int fbcdn(string domain, string url, string *urlf);
 int ggpht(string domain, string url, string *urlf);
 int globo(string domain, string url, string *urlf);
 int gstatic(string domain, string url, string *urlf);
-int java(string domain, string url, string *urlf);
+int sun(string domain, string url, string *urlf);
 int metacafe(string domain, string url, string *urlf);
 int modovideo(string domain, string url, string *urlf);
 int msn(string domain, string url, string *urlf);

@@ -12,7 +12,7 @@ PLUGINS = $(D_PLUGINS)avast.o \
 	$(D_PLUGINS)ggpht.o \
 	$(D_PLUGINS)globo.o \
 	$(D_PLUGINS)gstatic.o \
-	$(D_PLUGINS)java.o \
+	$(D_PLUGINS)sun.o \
 	$(D_PLUGINS)metacafe.o \
 	$(D_PLUGINS)modovideo.o \
 	$(D_PLUGINS)msn.o \

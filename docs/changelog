@@ -1,7 +1,14 @@
 Changelog
 =========
 
-0.4.0 (2012-05-08)
+0.4.0-testing (2012-06-04)
+-----
+Changed behavior when a unknown address is parsed, now the helper just return without checking.
+renamed java to sun
+updated sun. Thanks to Rodrigo Minelli
+updated metacafe
+
+0.4.0-testing (2012-05-14)
 -----
 Separated plugins from main code.
 added netflix images and videos, needs ignore-no-store patch present in Lusca Cache.
@@ -9,6 +16,8 @@ added java updates
 added terratv (some small videos)
 added videolog.tv
 added modovideo
+updated xvideos. Thanks to Marcos Scheinpflug
+fixed tumblr refresh pattern
 
 0.3.9.1 (2012-03-29)
 -----
