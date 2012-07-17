@@ -70,37 +70,41 @@ int main(int argc, char **argv)
 		
 	if(argc > 1){
 		if(argv[1][0] == '-' && argv[1][1] == 'v' ) {
-			cout << "inComum 0.4-preview (2012-06-04)  http://sourceforge.net/projects/incomum/" << endl;
+			cout << "inComum 0.4-preview (2012-07-16)  http://sourceforge.net/projects/incomum/" << endl;
 			cout << "===========" << endl;
-			cout << "-facebook fbcdn" << endl;
-			cout << "-youtube" << endl;
-			cout << "-google video" << endl;
-			cout << "-orkut img/static" << endl;
-			cout << "-ggpht" << endl;
-			cout << "-google gstatic" << endl;
-			cout << "-tumblr" << endl;
-			cout << "-blogspot" << endl;
-			cout << "-photobucket" << endl;
+			cout << "-anitube" << endl;
 			cout << "-avast" << endl;
 			cout << "-avg" << endl;
-			cout << "-vimeo" << endl;
 			cout << "-blip.tv" << endl;
+			cout << "-blogspot" << endl;
+			cout << "-facebook fbcdn" << endl;
+			cout << "-ggpht" << endl;
 			cout << "-globo.com" << endl;
-			cout << "-tvuol.uol.com.br" << endl;
-			cout << "-redtube.com" << endl;
+			cout << "-google gstatic" << endl;
+			cout << "-google syndication" << endl;
+			cout << "-google video" << endl;
+			cout << "-kaspersky" << endl;
+			cout << "-modovideo.com" << endl;
+			cout << "-msn video" << endl;
+			cout << "-netflix img/video" << endl;
+			cout << "-orkut img/static" << endl;
+			cout << "-phncdn.com" << endl;
+			cout << "-photobucket" << endl;
 			cout << "-porntube.com" << endl;
 			cout << "-pornhub.com" << endl;
-			cout << "-phncdn.com" << endl;
-			cout << "-xvideos.com" << endl;
-			cout << "-netflix img/video" << endl;
-			cout << "-globo.com" << endl;
-			cout << "-msn video" << endl;
-			cout << "-videobb.com" << endl;
-			cout << "-modovideo.com" << endl;
-			cout << "-videolog.tv" << endl;
-			cout << "-terratv" << endl;
-			cout << "-java" << endl;
+			cout << "-redtube.com" << endl;
 			cout << "-sourceforge.net" << endl;
+			cout << "-sun" << endl;
+			cout << "-terratv" << endl;
+			cout << "-tumblr" << endl;
+			cout << "-tvuol.uol.com.br" << endl;
+			cout << "-videobb.com" << endl;
+			cout << "-videolog.tv" << endl;
+			cout << "-vimeo" << endl;
+			cout << "-xvideos.com" << endl;
+			cout << "-youtube" << endl;
+
+			
 			#if debug
 				cout << "-=[ Running in debug mode. Check /tmp/inComum-*.log files ]=-" << endl;
 			#endif
@@ -113,7 +117,7 @@ int main(int argc, char **argv)
 		x = url.find_first_of(" ");
 		if(x != string::npos){
 			url = url.erase(x);
-		}		
+		}
 		domain = get_domain(url);
 
 		//https is just tunneling (can't cache) - don't cache ftp either
@@ -135,11 +139,13 @@ int main(int argc, char **argv)
 		if(!ytimg(domain,url,&urlf))
 		if(!ggpht(domain,url,&urlf))
 		if(!gstatic(domain,url,&urlf))
+		if(!googlesyndication(domain,url,&urlf))
 		if(!tumblr(domain,url,&urlf))
 		if(!photobucket(domain,url,&urlf))
 		if(!blogspot(domain,url,&urlf))
 		if(!avast(domain,url,&urlf))
 		if(!avg(domain,url,&urlf))
+		if(!kaspersky(domain,url,&urlf))
 		if(!vimeo(domain,url,&urlf))
 		if(!metacafe(domain,url,&urlf))
 		if(!blip(domain,url,&urlf))
@@ -157,6 +163,7 @@ int main(int argc, char **argv)
 		if(!videologtv(domain,url,&urlf))
 		if(!terratv(domain,url,&urlf))
 		if(!sun(domain,url,&urlf))
+		if(!anitube(domain,url,&urlf))
 			sourceforge(domain,url,&urlf);
 
 		#if debug

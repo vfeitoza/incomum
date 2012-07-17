@@ -4,15 +4,17 @@ CFLAGS = -c -Wall -O2
 LDFLAGS = -s
 RM = /bin/rm -f
 OBJS = $(D_OBJ)main.o $(D_OBJ)helper.o
-PLUGINS = $(D_PLUGINS)avast.o \
+PLUGINS = $(D_PLUGINS)anitube.o \
+	$(D_PLUGINS)avast.o \
 	$(D_PLUGINS)avg.o \
 	$(D_PLUGINS)blip.o \
 	$(D_PLUGINS)blogspot.o \
 	$(D_PLUGINS)fbcdn.o \
 	$(D_PLUGINS)ggpht.o \
 	$(D_PLUGINS)globo.o \
+	$(D_PLUGINS)googlesyndication.o \
 	$(D_PLUGINS)gstatic.o \
-	$(D_PLUGINS)sun.o \
+	$(D_PLUGINS)kaspersky.o \
 	$(D_PLUGINS)metacafe.o \
 	$(D_PLUGINS)modovideo.o \
 	$(D_PLUGINS)msn.o \
@@ -24,6 +26,7 @@ PLUGINS = $(D_PLUGINS)avast.o \
 	$(D_PLUGINS)porntube.o \
 	$(D_PLUGINS)redtube.o \
 	$(D_PLUGINS)sourceforge.o \
+	$(D_PLUGINS)sun.o \
 	$(D_PLUGINS)terratv.o \
 	$(D_PLUGINS)tumblr.o \
 	$(D_PLUGINS)tvuol.o \

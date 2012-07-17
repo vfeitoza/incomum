@@ -11,7 +11,7 @@ int sun(string domain, string url, string *urlf)
 {
 	if (regexMatch("^http://(javadl|sdlc)\\-esd\\.sun.com/", domain)) {
 		if (regexMatch("(\\.exe|\\.msi|\\.cab|\\.sh|\\.bin|\\.rpm|\\.MST|\\.dll)", url)) {
-			*urlf = "http://java.inComum/" + get_path(url, 'Y');
+			*urlf = "http://sun.inComum/" + get_path(url, 'Y');
 			return 1;
 		}
 	}
