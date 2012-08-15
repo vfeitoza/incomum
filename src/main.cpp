@@ -127,44 +127,44 @@ int main(int argc, char **argv)
 		}
 
 		//squid may send a blank line to exit
-		if(url.empty() || url.substr(0,7) != "http://"){
+		if(url.empty()){
 			cout << url << endl;
 			continue;
 		}
 
 		urlf=url;
-		if(!fbcdn(domain,url,&urlf))
-		if(!youtube(domain,url,&urlf))
-		if(!orkut(domain,url,&urlf))
-		if(!ytimg(domain,url,&urlf))
-		if(!ggpht(domain,url,&urlf))
-		if(!gstatic(domain,url,&urlf))
-		if(!googlesyndication(domain,url,&urlf))
-		if(!tumblr(domain,url,&urlf))
-		if(!photobucket(domain,url,&urlf))
-		if(!blogspot(domain,url,&urlf))
-		if(!avast(domain,url,&urlf))
-		if(!avg(domain,url,&urlf))
-		if(!kaspersky(domain,url,&urlf))
-		if(!vimeo(domain,url,&urlf))
-		if(!metacafe(domain,url,&urlf))
-		if(!blip(domain,url,&urlf))
-		if(!globo(domain,url,&urlf))
-		if(!tvuol(domain,url,&urlf))
-		if(!netflix(domain,url,&urlf))
-		if(!porntube(domain,url,&urlf))
-		if(!redtube(domain,url,&urlf))
-		if(!xvideos(domain,url,&urlf))
-		if(!phncdn(domain,url,&urlf))
-		if(!pornhub(domain,url,&urlf))
-		if(!msn(domain,url,&urlf))
-		if(!videobb(domain,url,&urlf))
-		if(!modovideo(domain,url,&urlf))
-		if(!videologtv(domain,url,&urlf))
-		if(!terratv(domain,url,&urlf))
-		if(!sun(domain,url,&urlf))
-		if(!anitube(domain,url,&urlf))
-			sourceforge(domain,url,&urlf);
+		if(!fbcdn(&domain,&url,&urlf))
+		if(!youtube(&domain,&url,&urlf))
+		if(!orkut(&domain,&url,&urlf))
+		if(!ytimg(&domain,&url,&urlf))
+		if(!ggpht(&domain,&url,&urlf))
+		if(!gstatic(&domain,&url,&urlf))
+		if(!googlesyndication(&domain,&url,&urlf))
+		if(!tumblr(&domain,&url,&urlf))
+		if(!photobucket(&domain,&url,&urlf))
+		if(!blogspot(&domain,&url,&urlf))
+		if(!avast(&domain,&url,&urlf))
+		//if(!avg(&domain,&url,&urlf))
+		if(!kaspersky(&domain,&url,&urlf))
+		if(!vimeo(&domain,&url,&urlf))
+		if(!metacafe(&domain,&url,&urlf))
+		if(!blip(&domain,&url,&urlf))
+		if(!globo(&domain,&url,&urlf))
+		if(!tvuol(&domain,&url,&urlf))
+		if(!netflix(&domain,&url,&urlf))
+		if(!porntube(&domain,&url,&urlf))
+		if(!redtube(&domain,&url,&urlf))
+		if(!xvideos(&domain,&url,&urlf))
+		if(!phncdn(&domain,&url,&urlf))
+		if(!pornhub(&domain,&url,&urlf))
+		if(!msn(&domain,&url,&urlf))
+		if(!videobb(&domain,&url,&urlf))
+		if(!modovideo(&domain,&url,&urlf))
+		if(!videologtv(&domain,&url,&urlf))
+		if(!terratv(&domain,&url,&urlf))
+		if(!sun(&domain,&url,&urlf))
+		if(!anitube(&domain,&url,&urlf))
+			sourceforge(&domain,&url,&urlf);
 
 		#if debug
 			if(urlf == url){
