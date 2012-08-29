@@ -44,7 +44,7 @@ For now, you may change the following options:
 
 6. Install helper on squid.conf
 
-To install add following line (without #) on squid.conf:
+To install add following line on squid.conf:
 
 include /etc/squid/inComum.conf
 

@@ -3,11 +3,11 @@
 using namespace std;
 
 //globo plugin
-int globo(string *domain, string *url, string *urlf)
+int globo(string *domain, string *urlf)
 {
 	if(regexMatch("\\.globo\\.com/$", *domain)){
-		if(regexMatch("^http://flashvideo\\.globo\\.com/.*\\.mp4", *url)){
-			*urlf = "http://flashvideo.globo.inComum/" + get_path(*url,'Y');
+		if(regexMatch("^http://flashvideo\\.globo\\.com/.*\\.mp4", *urlf)){
+			*urlf = "http://flashvideo.globo.inComum/" + get_path(*urlf,'Y');
 		}
 		return 1;
 	}

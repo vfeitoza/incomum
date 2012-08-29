@@ -9,11 +9,11 @@ using namespace std;
 // example4: http://dnl-12.geo.kaspersky.com/diffs/bases/ids/i386/idsbase.kdz.srf 
 // rewrite to: http://kaspersky.inComum/path/file.ext
 
-int kaspersky(string *domain, string *url, string *urlf)
+int kaspersky(string *domain, string *urlf)
 {
 	if(regexMatch("\\.kaspersky\\.com", *domain)){
-		if(regexMatch("^http://dnl-.{2}\\.geo\\.kaspersky\\.com/", *url)){
-			*urlf = "http://kaspersky.inComum/" + get_path(*url,'N');
+		if(regexMatch("^http://dnl-.{2}\\.geo\\.kaspersky\\.com/", *urlf)){
+			*urlf = "http://kaspersky.inComum/" + get_path(*urlf,'N');
 		}
 		return 1;
 	}

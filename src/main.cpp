@@ -70,11 +70,11 @@ int main(int argc, char **argv)
 		
 	if(argc > 1){
 		if(argv[1][0] == '-' && argv[1][1] == 'v' ) {
-			cout << "inComum 0.4-preview (2012-07-16)  http://sourceforge.net/projects/incomum/" << endl;
+			cout << "inComum 0.4 (2012-08-14)  http://sourceforge.net/projects/incomum/" << endl;
 			cout << "===========" << endl;
 			cout << "-anitube" << endl;
 			cout << "-avast" << endl;
-			cout << "-avg" << endl;
+			//cout << "-avg" << endl;
 			cout << "-blip.tv" << endl;
 			cout << "-blogspot" << endl;
 			cout << "-facebook fbcdn" << endl;
@@ -133,38 +133,38 @@ int main(int argc, char **argv)
 		}
 
 		urlf=url;
-		if(!fbcdn(&domain,&url,&urlf))
-		if(!youtube(&domain,&url,&urlf))
-		if(!orkut(&domain,&url,&urlf))
-		if(!ytimg(&domain,&url,&urlf))
-		if(!ggpht(&domain,&url,&urlf))
-		if(!gstatic(&domain,&url,&urlf))
-		if(!googlesyndication(&domain,&url,&urlf))
-		if(!tumblr(&domain,&url,&urlf))
-		if(!photobucket(&domain,&url,&urlf))
-		if(!blogspot(&domain,&url,&urlf))
-		if(!avast(&domain,&url,&urlf))
-		//if(!avg(&domain,&url,&urlf))
-		if(!kaspersky(&domain,&url,&urlf))
-		if(!vimeo(&domain,&url,&urlf))
-		if(!metacafe(&domain,&url,&urlf))
-		if(!blip(&domain,&url,&urlf))
-		if(!globo(&domain,&url,&urlf))
-		if(!tvuol(&domain,&url,&urlf))
-		if(!netflix(&domain,&url,&urlf))
-		if(!porntube(&domain,&url,&urlf))
-		if(!redtube(&domain,&url,&urlf))
-		if(!xvideos(&domain,&url,&urlf))
-		if(!phncdn(&domain,&url,&urlf))
-		if(!pornhub(&domain,&url,&urlf))
-		if(!msn(&domain,&url,&urlf))
-		if(!videobb(&domain,&url,&urlf))
-		if(!modovideo(&domain,&url,&urlf))
-		if(!videologtv(&domain,&url,&urlf))
-		if(!terratv(&domain,&url,&urlf))
-		if(!sun(&domain,&url,&urlf))
-		if(!anitube(&domain,&url,&urlf))
-			sourceforge(&domain,&url,&urlf);
+		if(!fbcdn(&domain,&urlf))
+		if(!youtube(&domain,&urlf))
+		if(!orkut(&domain,&urlf))
+		if(!ytimg(&domain,&urlf))
+		if(!ggpht(&domain,&urlf))
+		if(!gstatic(&domain,&urlf))
+		if(!googlesyndication(&domain,&urlf))
+		if(!tumblr(&domain,&urlf))
+		if(!photobucket(&domain,&urlf))
+		if(!blogspot(&domain,&urlf))
+		if(!avast(&domain,&urlf))
+		//if(!avg(&domain,&urlf))
+		if(!kaspersky(&domain,&urlf))
+		if(!vimeo(&domain,&urlf))
+		if(!metacafe(&domain,&urlf))
+		if(!blip(&domain,&urlf))
+		if(!globo(&domain,&urlf))
+		if(!tvuol(&domain,&urlf))
+		if(!netflix(&domain,&urlf))
+		if(!porntube(&domain,&urlf))
+		if(!redtube(&domain,&urlf))
+		if(!xvideos(&domain,&urlf))
+		if(!phncdn(&domain,&urlf))
+		if(!pornhub(&domain,&urlf))
+		if(!msn(&domain,&urlf))
+		if(!videobb(&domain,&urlf))
+		if(!modovideo(&domain,&urlf))
+		if(!videologtv(&domain,&urlf))
+		if(!terratv(&domain,&urlf))
+		if(!sun(&domain,&urlf))
+		if(!anitube(&domain,&urlf))
+			sourceforge(&domain,&urlf);
 
 		#if debug
 			if(urlf == url){

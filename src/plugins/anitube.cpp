@@ -7,13 +7,13 @@ using namespace std;
 // example2: http://lb02-wdc.anitube.com.br/mobile/b9751d0c6c19328ec03cb4408aadaeff/4ffca46f/46283.mp4
 // rewrite to: http://anitube.inComum/file.flv or http://anitube.inComum/mobile/file.mp4
 
-int anitube(string *domain, string *url, string *urlf)
+int anitube(string *domain, string *urlf)
 {
 	if(regexMatch("anitube\\.com\\.br/$", *domain)){
-		if (regexMatch("\\.flv$", get_filename(*url))){
-			*urlf = "http://anitube.inComum/" + get_filename(*url) + "?start=" + get_var(*url, "start");
-		} else if (regexMatch("\\.mp4$", get_filename(*url))){
-			*urlf = "http://anitube.inComum/mobile/" + get_filename(*url);
+		if (regexMatch("\\.flv$", get_filename(*urlf))){
+			*urlf = "http://anitube.inComum/" + get_filename(*urlf) + "?start=" + get_var(*urlf, "start");
+		} else if (regexMatch("\\.mp4$", get_filename(*urlf))){
+			*urlf = "http://anitube.inComum/mobile/" + get_filename(*urlf);
 		}
 		return 1;
 	}
