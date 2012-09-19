@@ -8,7 +8,7 @@ using namespace std;
 int modovideo(string *domain, string *urlf)
 {
 	if(regexMatch("\\.modovideo\\.com/$", *domain)){
-		if(regexMatch("^http://s.{2,3}\\.modovideo\\.com/(vid|uploadvideos)/.*\\.(flv|ts)$", *urlf)){
+		if(regexMatch("^http://s.{2,3}\\.modovideo\\.com/(vid|uploadvideos)/.*\\.(flv|ts)", *urlf)){
 			*urlf = "http://modovideo.inComum/" + get_filename(*urlf) + "?start=" + get_var(*urlf,"start");
 		}
 		return 1;

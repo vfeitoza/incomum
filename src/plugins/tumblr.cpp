@@ -2,7 +2,7 @@
 
 using namespace std;
 
-//tumblr.com -last check: 2012-03-24
+//tumblr.com -last check: 2012-09-13
 int tumblr(string *domain, string *urlf)
 {
 	if(regexMatch("\\.tumblr\\.com/$", *domain)){

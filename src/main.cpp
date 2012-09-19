@@ -95,7 +95,7 @@ int main(int argc, char **argv)
 			cout << "-redtube.com" << endl;
 			cout << "-sourceforge.net" << endl;
 			cout << "-sun" << endl;
-			cout << "-terratv" << endl;
+			//cout << "-terratv" << endl;
 			cout << "-tumblr" << endl;
 			cout << "-tvuol.uol.com.br" << endl;
 			cout << "-videobb.com" << endl;
@@ -161,7 +161,7 @@ int main(int argc, char **argv)
 		if(!videobb(&domain,&urlf))
 		if(!modovideo(&domain,&urlf))
 		if(!videologtv(&domain,&urlf))
-		if(!terratv(&domain,&urlf))
+		// if(!terratv(&domain,&urlf))
 		if(!sun(&domain,&urlf))
 		if(!anitube(&domain,&urlf))
 			sourceforge(&domain,&urlf);
