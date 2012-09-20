@@ -12,14 +12,14 @@ int phncdn(string *domain, string *urlf)
 			*urlf = "http://image.pornhub.phncdn.inComum/" + get_path(*urlf, 'Y');
 		} else if (regexMatch("^http://cdn.[ab]\\.video\\.pornhub\\.phncdn.com/$", *domain)){
 			*urlf = "http://video.pornhub.phncdn.inComum/" + get_path(*urlf, 'Y') + "?fs=" + get_var(*urlf, "fs");
-		} else if (regexMatch("^http://cdn.\\.(image|static)\\.tube8\\.phncdn.com/$", *domain)){		  
+		} else if (regexMatch("^http://cdn.\\.(image|static)\\.tube8\\.phncdn.com/$", *domain)){
 			*urlf = "http://tube8.phncdn.inComum/" + get_path(*urlf, 'Y');
 		} else if (regexMatch("^http://cdn.\\.(image|static|public)\\.keezmovies\\.phncdn.com/$", *domain)){
-			*urlf = "http://keezmovies.phncdn.inComum/" + get_path(*urlf, 'Y') + "?start=" + get_var(*urlf, "start");;
+			*urlf = "http://keezmovies.phncdn.inComum/" + get_path(*urlf, 'Y') + "?start=" + get_var(*urlf, "start");
 		} else if (regexMatch("^http://cdn.\\.(image|static|public)\\.extremetube\\.phncdn.com/$", *domain)){
-			*urlf = "http://public.extremetube.phncdn.inComum/" + get_path(*urlf, 'Y') + "?start=" + get_var(*urlf, "start");;
+			*urlf = "http://public.extremetube.phncdn.inComum/" + get_path(*urlf, 'Y') + "?start=" + get_var(*urlf, "start");
 		} else if (regexMatch("^http://cdn.\\.(image|static|public)\\.spankwire\\.phncdn.com/$", *domain)){
-			*urlf = "http://public.spankwire.phncdn.inComum/" + get_path(*urlf, 'Y') + "?start=" + get_var(*urlf, "start");;
+			*urlf = "http://public.spankwire.phncdn.inComum/" + get_path(*urlf, 'Y') + "?start=" + get_var(*urlf, "start");
 		}
 		return 1;
 	}
