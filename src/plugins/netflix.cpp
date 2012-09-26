@@ -21,7 +21,7 @@ int netflix(string *domain, string *urlf)
 	
 	// Images
 	// example image: http://cdn-9.nflximg.com/pt_latam/boxshots/large/60004479.jpg
-	if (regexMatch("^http://cdn-.\\.nflximg\\.com/$", *domain)){
+	if (regexMatch("^http://cdn-.\\.nflximg\\.com/", *domain)){
 		*urlf = "http://netflix.inComum/" + get_path(*urlf, 'Y');
 		return 1;
 	}

@@ -3,7 +3,7 @@ using namespace std;
 
 int anitube(string *domain, string *urlf);
 int avast(string *domain, string *urlf);
-//int avg(string *domain, string *urlf);
+int avg(string *domain, string *urlf);
 int blip(string *domain, string *urlf);
 int blogspot(string *domain, string *urlf);
 int fbcdn(string *domain, string *urlf);

@@ -70,7 +70,7 @@ int main(int argc, char **argv)
 		
 	if(argc > 1){
 		if(argv[1][0] == '-' && argv[1][1] == 'v' ) {
-			cout << "inComum 0.4 (2012-08-14)  http://sourceforge.net/projects/incomum/" << endl;
+			cout << "inComum 0.4 (2012-09-26)  http://sourceforge.net/projects/incomum/" << endl;
 			cout << "===========" << endl;
 			cout << "-anitube" << endl;
 			cout << "-avast" << endl;
@@ -144,7 +144,7 @@ int main(int argc, char **argv)
 		if(!photobucket(&domain,&urlf))
 		if(!blogspot(&domain,&urlf))
 		if(!avast(&domain,&urlf))
-		//if(!avg(&domain,&urlf))
+		if(!avg(&domain,&urlf))
 		if(!kaspersky(&domain,&urlf))
 		if(!vimeo(&domain,&urlf))
 		if(!metacafe(&domain,&urlf))
@@ -159,11 +159,11 @@ int main(int argc, char **argv)
 		if(!pornhub(&domain,&urlf))
 		if(!msn(&domain,&urlf))
 		if(!videobb(&domain,&urlf))
-		if(!modovideo(&domain,&urlf))
 		if(!videologtv(&domain,&urlf))
 		// if(!terratv(&domain,&urlf))
 		if(!sun(&domain,&urlf))
 		if(!anitube(&domain,&urlf))
+		if(!modovideo(&domain,&urlf))
 			sourceforge(&domain,&urlf);
 
 		#if debug

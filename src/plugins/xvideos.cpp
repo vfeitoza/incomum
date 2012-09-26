@@ -13,7 +13,7 @@ int xvideos(string *domain, string *urlf)
 	if (regexMatch("\\.xvideos\\.com/$", *domain)){
 		if (regexMatch("^http://porn.{1,3}\\.xvideos\\.com/$", *domain) || regexMatch("^http://porn\\.im\\..{1,}\\.xvideos.com/$", *domain)) {
 			if (regexMatch("\\.(flv|mp4)", *urlf)) {
-				*urlf = "http://xvideos.inComum/" + get_path(*urlf, 'Y') + "?rs=" + get_var(*urlf, "rs") + "&ri=" + get_var(*urlf, "ri") + "&start=" + get_var(*urlf, "fs");
+				*urlf = "http://xvideos.inComum/" + get_path(*urlf, 'Y') + "?rs=" + get_var(*urlf, "rs") + "&ri=" + get_var(*urlf, "ri") + "&start=" + get_var(*urlf, "start") + get_var(*urlf, "fs");
 			}
 		}			
 		return 1;

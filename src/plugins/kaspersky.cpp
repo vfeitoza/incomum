@@ -2,7 +2,7 @@
 
 using namespace std;
 
-// Kaspersky updates plugin - last check: 2012-07-10
+// Kaspersky updates plugin - last check: 2012-09-02
 // example1: http://dnl-08.geo.kaspersky.com/bases/av/kdb/i386/dailyc.kdc
 // example2: http://dnl-01.geo.kaspersky.com/bases/av/kdb/i386/kdb-i386-0607g.xml.dif
 // example3: http://dnl-18.geo.kaspersky.com/bases/ids/i386/idsbase.kdz
