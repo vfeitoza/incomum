@@ -13,6 +13,7 @@
 	#include <fstream>
 	#include <sys/types.h>
 	#include <sstream>
+	#include <unistd.h>
 #endif
 using namespace std;
 string get_var(const string url,const string var); //get some var from url

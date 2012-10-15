@@ -1,17 +1,18 @@
 Changelog
 =========
 
-0.4.0 (2012-09-26)
+0.4.0RC (2012-09-15)
 -----
-check anitube
-check metacafe
-check modovideo
-check tumblr
-check kaspersky
+checked anitube
+checked metacafe
+checked modovideo
+checked tumblr
+checked kaspersky
 updated xvideos
 updated sun
 updated globo.com
 updated avg
+removed terratv
 
 0.4.0-testing (2012-07-16)
 -----
@@ -19,7 +20,7 @@ added anitube
 added googlesyndication
 added kaspersky updates
 updated netflix
-updated sun 
+updated sun
 
 0.4.0-testing (2012-06-04)
 -----

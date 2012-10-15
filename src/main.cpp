@@ -37,14 +37,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *
 * If using boost library, use this:
 * make all ENABLE_BOOST=y
-* 
+*
 * To compile in debug mode (to show URL rewrites on /tmp/inComum-*.log)
 * make all DEBUG=y
 *
 * If you add another plugin, please, send us a copy to email:
 * luciano.pinheiro@gmail.com
-* 
-* 
+*
+*
 * Version 0.4
 *
 */
@@ -55,7 +55,7 @@ int main(int argc, char **argv)
 {
 	string url, urlf, id, domain;
 	string::size_type x;
-	
+
 	#if debug
 		pid_t pid;
 		pid = getpid();
@@ -67,14 +67,14 @@ int main(int argc, char **argv)
 		ofstream SaveLine(arraystring.c_str(), ios::out);
 		//ofstream SaveLine("/tmp/inComum-" + pid + ".log", ios::out);
 	#endif
-		
+
 	if(argc > 1){
 		if(argv[1][0] == '-' && argv[1][1] == 'v' ) {
-			cout << "inComum 0.4 (2012-09-26)  http://sourceforge.net/projects/incomum/" << endl;
+			cout << "inComum 0.4 (2012-10-15)  http://sourceforge.net/projects/incomum/" << endl;
 			cout << "===========" << endl;
 			cout << "-anitube" << endl;
 			cout << "-avast" << endl;
-			//cout << "-avg" << endl;
+			cout << "-avg" << endl;
 			cout << "-blip.tv" << endl;
 			cout << "-blogspot" << endl;
 			cout << "-facebook fbcdn" << endl;
@@ -104,7 +104,7 @@ int main(int argc, char **argv)
 			cout << "-xvideos.com" << endl;
 			cout << "-youtube" << endl;
 
-			
+
 			#if debug
 				cout << "-=[ Running in debug mode. Check /tmp/inComum-*.log files ]=-" << endl;
 			#endif
