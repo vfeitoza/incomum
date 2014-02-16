@@ -1,4 +1,4 @@
-inComum 0.4.0
+inComum 0.4.0RC2
 =======
 Squid (or Lusca) helper to be used with storeurl_rewrite_program feature.
 His goal is to create equivalency rules for distinct but equivalent URLs.
@@ -19,3 +19,4 @@ http://sourceforge.net/projects/incomum/
 inComum Team:
 Luciano Pinheiro (lucianopinheiro@users.sourceforge.net)
 Robson F. Ramaldes (rframaldes@users.sf.net)
+Vitor Feitoza

@@ -4,7 +4,7 @@
 /*
  * BSD License
  *
-Copyright (c) 2012, The inComum Team.
+Copyright (c) 2014, The inComum Team.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -45,7 +45,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 * luciano.pinheiro@gmail.com
 *
 *
-* Version 0.4
+* Version 0.4.0RC2
 *
 */
 
@@ -121,7 +121,7 @@ int main(int argc, char **argv)
 		domain = get_domain(url);
 
 		//https is just tunneling (can't cache) - don't cache ftp either
-		if(url.substr(0,8) == "https://" || url.substr(0,6) == "ftp://"){
+		if(url.substr(0,8) == "https://" || url.substr(0,6) == "ftp://" || regexMatch(":443", domain)){
 			cout << url << endl;
 			continue;
 		}
